@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'SeagramTFB';
-  src: url('../assets/font/Seagram\ tfb.ttf') format('truetype');
+  src: url('../assets/font/Seagram tfb.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'SeagramTFB', serif;
   background: #111;
   color: #fff;
   overflow: hidden;
@@ -63,21 +63,24 @@ body {
   justify-content: space-between;
   transform: translateY(-50%);
   padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 #nav .nav-btn {
+  font-family: 'SeagramTFB', serif;
   color: #fff;
   font-size: 3rem;
   text-decoration: none;
-  padding: 0.5rem 1rem;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
 }
 
 #nav .nav-btn:hover {
   color: gold;
 }
 
-/* Spécial couverture */
+/* --- Couverture (page 1) --- */
 .cover-title {
   position: absolute;
   top: 50%;
@@ -114,4 +117,39 @@ body {
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* --- Page 2 Présentation --- */
+.title-page {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  text-align: center;
+  color: black;
+}
+
+.title-page h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.title-page .subtitle {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.footer-info {
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: black;
+  max-width: 50%;   /* centrage horizontal */
+  margin: 0 auto;
+  padding: 0 1rem;
 }
