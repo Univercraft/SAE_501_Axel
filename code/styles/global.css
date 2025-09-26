@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'SeagramTFB';
+  src: url('../assets/font/Seagram\ tfb.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
+  overflow: hidden;
+}
+
+#page-container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+.page {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.page.full .text-zone {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  right: 5%;
+  background: rgba(0,0,0,0.6);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.page.half {
+  display: flex;
+}
+
+.page.full .illustration,
+.page.half .illustration {
+  flex: 1;
+  min-height:100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 2px solid red;
+}
+
+
+
+.page.half .text-zone {
+  flex: 1;
+  padding: 2rem;
+  background: rgba(0,0,0,0.7);
+}
+
+#nav {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#nav button {
+  background: rgba(0,0,0,0.4);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
