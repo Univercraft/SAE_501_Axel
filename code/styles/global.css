@@ -153,3 +153,18 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+/* --- Page de texte (style du conte) --- */
+.text-box {
+  transform: translateX(-50%);
+  width: 60%;
+  padding: 1rem 1rem;
+  text-align: justify;
+  font-family: 'SeagramTFB', serif;
+  color: #000;
+  line-height: 1.5;
+}
+
+.text-box p {
+  margin: 0;
+}
