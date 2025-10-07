@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,16 +6,31 @@
   <link rel="stylesheet" href="../styles/global.css">
 </head>
 <body>
-  <div class="page half">
-    <div class="illustration" style="background-image:url('../assets/page_8.png')"></div>
-    <div class="text-zone">
-      <h1>La lettre piégée</h1>
-      <p>Le roi envoie le jeune homme à la reine avec une lettre : « Dès que ce garçon arrivera, faites-le tuer. »</p>
+  <div class="page two-column">
+    <!-- gauche : illustration -->
+    <div class="col left">
+      <div class="illustration" style="background-image:url('../assets/page_8.png')"></div>
+    </div>
+
+    <!-- droite : page vierge avec texte -->
+    <div class="col right">
+      <div class="page-vierge" style="background-image:url('../assets/page_vierge.jpg')">
+        <div class="vignette-text">
+          <p>
+            Le roi reconnut alors que c’était l’enfant né coiffé qu’il avait jeté à la rivière. « Bonnes gens, dit-il, ce jeune homme ne pourrait-il pas porter une lettre de ma part à la reine ? je lui donnerais deux pièces d’or pour sa peine.
+          </p>
+          <p>
+            — Comme Votre Majesté l’ordonnera, » répondirent-ils ; et ils dirent au jeune homme de se tenir prêt. Le roi écrivit à la reine une lettre où il lui mandait de se saisir du messager, de le mettre à mort et de l’enterrer, de façon à ce qu’il trouvât la chose faite à son retour.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Navigation -->
   <div id="nav">
-  <a class="nav-btn prev" href="page_7.html">&lt;</a>
-  <a class="nav-btn next" href="page_9.html">&gt;</a>
-</div>
+    <a class="nav-btn prev" href="page_7.html">&lt;</a>
+    <a class="nav-btn next" href="page_9.html">&gt;</a>
+  </div>
 </body>
 </html>
