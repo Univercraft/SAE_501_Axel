@@ -156,7 +156,6 @@ body {
 
 /* --- Page de texte (style du conte) --- */
 .text-box {
-  transform: translateX(-50%);
   width: 60%;
   padding: 1rem 1rem;
   text-align: justify;
