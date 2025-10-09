@@ -1,3 +1,9 @@
+/* styles.css */
+
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+
 @font-face {
   font-family: 'SeagramTFB';
   src: url('../assets/font/Seagram tfb.ttf') format('truetype');
