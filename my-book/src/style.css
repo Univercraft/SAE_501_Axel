@@ -1,104 +1,180 @@
-/* src/style.css */
-/* import principal Tailwind (v4 : import simplifié compatible plugin Vite) */
+/* --- Import Tailwind --- */
 @import "tailwindcss";
 
-/* tu peux ajouter ici tes styles globaux / variables CSS */
-html, body { height: 100%; }
-#app { height: 100vh; }
-
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* --- POLICE SEAGRAM --- */
+@font-face {
+  font-family: 'SeagramTFB';
+  src: url('/assets/font/Seagram tfb.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* --- RESET & BASE --- */
+html, body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+  color: white;
+  font-family: 'SeagramTFB', serif;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- GENERAL TEXT --- */
+.font-seagram {
+  font-family: 'SeagramTFB', serif;
+}
+
+/* --- COUVERTURE --- */
+.cover-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+.cover-title h1 {
+  font-family: 'SeagramTFB', serif;
+  font-size: 4rem;
+  background: linear-gradient(-45deg, #D9D66A, #D9C86A, #DBBF1E, #D9D66A);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldenShine 5s infinite alternate;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
-.card {
-  padding: 2em;
+@keyframes goldenShine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* --- BOUTONS NAVIGATION LATÉRAUX --- */
+#nav-left, #nav-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'SeagramTFB', serif;
+  font-size: 5rem;
+  color: rgba(255, 255, 255, 0.85);
+  z-index: 30;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  user-select: none;
+  transition: transform 0.3s, color 0.3s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+#nav-left:hover, #nav-right:hover {
+  color: #f5d45c;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Position spécifique */
+#nav-left { left: 1rem; }
+#nav-right { right: 1rem; }
+
+/* --- PAGES PLEINES --- */
+.pleine {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Texte haut */
+.pleine-haut .text-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.6);
+  padding: 2rem;
+  max-width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Texte bas */
+.pleine-bas .text-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0,0,0,0.6);
+  padding: 2rem;
+  max-width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* --- PAGES PETITES --- */
+.petite {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Image gauche */
+.petite .img-left {
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Texte droite sur page_vierge */
+.petite .text-right {
+  width: 50%;
+  height: 100%;
+  background-image: url('/assets/page_vierge.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.petite .text-right .text-content {
+  background-color: rgba(0,0,0,0.4);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  max-width: 80%;
+  text-align: left;
+  font-family: 'SeagramTFB', serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* --- MEDIA QUERIES (responsive) --- */
+@media (max-width: 768px) {
+  .cover-title h1 {
+    font-size: 2.5rem;
   }
-  a:hover {
-    color: #747bff;
+
+  #nav-left, #nav-right {
+    font-size: 3rem;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .pleine-haut .text-content,
+  .pleine-bas .text-content {
+    max-width: 90%;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .petite .text-right .text-content {
+    max-width: 90%;
+    font-size: 1rem;
   }
 }
