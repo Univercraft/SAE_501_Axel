@@ -7,5 +7,5 @@ export default defineConfig({
     tailwindcss(),
   ],
   // Remplacez 'nom-du-repo' par le nom de votre repository GitHub
-  base: process.env.NODE_ENV === 'production' ? 'SAE_501_Axel' : '/'
+  base: process.env.NODE_ENV === 'production' ? '/SAE_501_Axel/' : '/'
 })

@@ -1,13 +1,10 @@
 // src/data/pages.js
-
 export const pages = [
   // 1 - couverture début
-  { id: 1, type: "cover", img: "./public/assets/page_1.png", title: "Les trois cheveux d’or du diable", text: "" },
+  { id: 1, type: "cover", img: "/assets/page_1.png", title: "Les trois cheveux d’or du diable", text: "" },
 
   // 2 - présentation
-  { id: 2, type: "presentation", img: "/public/assets/page_2.png", title: "Les trois cheveux d’or du diable", translator: "Frédéric Baudry", author: "Les frères Grimm" 
-},
-
+  { id: 2, type: "presentation", img: "/assets/page_2.png", title: "Les trois cheveux d’or du diable", translator: "Frédéric Baudry", author: "Les frères Grimm" },
 
   // Pages pleines haut
   { id: 3, type: "pleine-haut", img: "/assets/page_3.png", text: "Texte de la page 3..." },
@@ -26,7 +23,7 @@ export const pages = [
   { id: 21, type: "pleine-bas", img: "/assets/page_21.png", text: "Texte de la page 21..." },
   { id: 22, type: "pleine-bas", img: "/assets/page_22.png", text: "Texte de la page 22..." },
 
-  // Pages petites (image à gauche + page_vierge à droite)
+  // Pages petites
   { id: 8, type: "petite", img: "/assets/page_8.png", text: "Texte de la page 8..." },
   { id: 9, type: "petite", img: "/assets/page_9.png", text: "Texte de la page 9..." },
   { id: 13, type: "petite", img: "/assets/page_13.png", text: "Texte de la page 13..." },
