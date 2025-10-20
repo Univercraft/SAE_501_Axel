@@ -53,26 +53,33 @@ export function initBook(selector = '#app') {
           <div class="relative h-full w-full bg-cover bg-center flex flex-col items-center justify-center text-center"
                style="background-image: url('${imgUrl}')">
             <div>
-              <h1 class="text-5xl md:text-6xl font-seagram mb-6">${page.title || "Les trois cheveux d'or du diable"}</h1>
-              <p class="text-2xl mb-2 font-seagram">Les frères Grimm</p>
-              <p class="text-lg font-seagram italic mb-16">Traduit par ${page.translator || "un traducteur anonyme"}</p>
+              <h1 class="text-5xl md:text-6xl font-seagram mb-6" style="color:black">${page.title || "Les trois cheveux d'or du diable"}</h1>
+              <p class="text-2xl mb-2 font-seagram" style="color:black">Les frères Grimm</p>
+              <p class="text-lg font-seagram italic mb-16" style="color:black">Traduit par ${page.translator || "un traducteur anonyme"}</p>
             </div>
-            <div class="absolute bottom-8 left-8 text-lg font-seagram">IUT Béziers</div>
-            <div class="absolute bottom-8 right-8 text-lg font-seagram">Axel CAETANO</div>
+            <!-- En bas : éléments rapprochés du centre -->
+            <div class="absolute bottom-10 left-1/4 text-lg font-seagram text-black">
+              IUT Béziers
+            </div>
+            <div class="absolute bottom-10 right-1/4 text-lg font-seagram text-black">
+              Axel CAETANO
+            </div>
           </div>
         `
         break
 
       // --- Page pleine (texte en haut) ---
-      case 'pleine-haut':
-        html = `
-          <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
-            <div class="absolute top-0 left-0 w-full bg-black/60 p-8">
-              <p class="text-lg max-w-3xl mx-auto font-seagram">${page.text || ''}</p>
-            </div>
-          </div>
-        `
-        break
+case 'pleine-haut':
+  html = `
+    <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
+      <div class="absolute top-0 left-0 w-full px-10 pt-8">
+        <p class="text-base md:text-lg lg:text-xl leading-relaxed max-w-5xl mx-auto text-justify font-seagram" style="color:black;">
+          ${page.text || ''}
+        </p>
+      </div>
+    </div>
+  `
+  break
 
       // --- Page pleine (texte en bas) ---
       case 'pleine-bas':

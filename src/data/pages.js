@@ -10,8 +10,8 @@ export const pages = [
   { id: 2, type: "presentation", img: `${BASE}assets/page_2.png`, title: "Les trois cheveux d’or du diable", translator: "Frédéric Baudry", author: "Les frères Grimm" },
 
   // Pages pleines haut
-  { id: 3, type: "pleine-haut", img: `${BASE}assets/page_3.png`, text: "Texte de la page 3..." },
-  { id: 4, type: "pleine-haut", img: `${BASE}assets/page_4.png`, text: "Texte de la page 4..." },
+  { id: 3, type: "pleine-haut", img: `${BASE}assets/page_3.png`, text: "Il était une fois une pauvre femme qui mit au monde un fils, et, comme il était coiffé quand il naquit, on lui prédit que, dans sa quatorzième année, il épouserait la fille du roi." },
+  { id: 4, type: "pleine-haut", img: `${BASE}assets/page_4.png`, text: "Sur ces entrefaites, le roi passa par le village, sans que personne le reconnût ; et comme il demandait ce qu’il y avait de nouveau, on lui répondit qu’il venait de naître un enfant coiffé, que tout ce qu’il entreprendrait lui réussirait, et qu’on lui avait prédit que, lorsqu’il aurait quatorze ans, il épouserait la fille du roi. Le roi avait un mauvais cœur, et cette prédiction le fâcha. Il alla trouver les parents du nouveau-né, et leur dit d’un air tout amical : « Vous êtes de pauvres gens, donnez-moi votre enfant, j’en aurai bien soin. » Ils refusèrent d’abord ; mais l’étranger leur offrit de l’or, et ils se dirent : « Puisque l’enfant est né coiffé, ce qui arrive est pour son bien. » Ils finirent par consentir et par livrer leur fils. Le roi le mit dans une boîte, et chevaucha avec ce fardeau jusqu’au bord d’une rivière profonde où il le jeta, en pensant qu’il délivrait sa fille d’un galant sur lequel elle ne comptait guère." },
   { id: 10, type: "pleine-haut", img: `${BASE}assets/page_10.png`, text: "Texte de la page 10..." },
   { id: 16, type: "pleine-haut", img: `${BASE}assets/page_16.png`, text: "Texte de la page 16..." },
 
