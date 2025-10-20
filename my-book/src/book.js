@@ -8,12 +8,11 @@ export function initBook(selector = '#app') {
       <div id="pages" class="absolute inset-0 transition-all duration-700 ease-in-out"></div>
 
       <!-- Flèches de navigation -->
-      <div id="nav-left" class="absolute left-4 top-1/2 -translate-y-1/2 text-5xl cursor-pointer select-none z-30 hidden"><</div>
-      <div id="nav-right" class="absolute right-4 top-1/2 -translate-y-1/2 text-5xl cursor-pointer select-none z-30 hidden">></div>
+      <div id="nav-left" class="absolute left-4 top-1/2 -translate-y-1/2 text-5xl cursor-pointer select-none z-30 hidden">&lt;</div>
+      <div id="nav-right" class="absolute right-4 top-1/2 -translate-y-1/2 text-5xl cursor-pointer select-none z-30 hidden">&gt;</div>
     </div>
   `
 
-  // tri sûr par id
   const pagesOrdered = Array.isArray(pages)
     ? pages.slice().sort((a, b) => (Number(a.id) || 9999) - (Number(b.id) || 9999))
     : []
@@ -33,9 +32,10 @@ export function initBook(selector = '#app') {
     }
 
     const imgUrl = page.img || '/assets/page_vierge.jpg'
-
     let html = ''
+
     switch (page.type) {
+      // --- Page de couverture ---
       case 'cover':
         html = `
           <div class="h-full w-full bg-cover bg-center flex items-center justify-center"
@@ -47,6 +47,23 @@ export function initBook(selector = '#app') {
         `
         break
 
+      // --- Nouvelle page de présentation ---
+      case 'presentation':
+        html = `
+          <div class="relative h-full w-full bg-cover bg-center flex flex-col items-center justify-center text-center"
+               style="background-image: url('${imgUrl}')">
+            <div>
+              <h1 class="text-5xl md:text-6xl font-seagram mb-6">${page.title || "Les trois cheveux d'or du diable"}</h1>
+              <p class="text-2xl mb-2 font-seagram">Les frères Grimm</p>
+              <p class="text-lg font-seagram italic mb-16">Traduit par ${page.translator || "un traducteur anonyme"}</p>
+            </div>
+            <div class="absolute bottom-8 left-8 text-lg font-seagram">IUT Béziers</div>
+            <div class="absolute bottom-8 right-8 text-lg font-seagram">Axel CAETANO</div>
+          </div>
+        `
+        break
+
+      // --- Page pleine (texte en haut) ---
       case 'pleine-haut':
         html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
@@ -57,6 +74,7 @@ export function initBook(selector = '#app') {
         `
         break
 
+      // --- Page pleine (texte en bas) ---
       case 'pleine-bas':
         html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
@@ -67,6 +85,7 @@ export function initBook(selector = '#app') {
         `
         break
 
+      // --- Page petite (moitié image / moitié texte) ---
       case 'petite':
         html = `
           <div class="flex h-full">
@@ -81,6 +100,7 @@ export function initBook(selector = '#app') {
         `
         break
 
+      // --- Par défaut ---
       default:
         html = `
           <div class="h-full w-full flex items-center justify-center bg-gray-800">
@@ -94,22 +114,19 @@ export function initBook(selector = '#app') {
 
     pagesEl.innerHTML = html
 
-    // Gestion des flèches
+    // --- Flèches de navigation ---
     if (page.type === 'cover') {
-      // couverture initiale : seule flèche droite
       btnLeft.style.display = 'none'
       btnRight.style.display = idx < pagesOrdered.length - 1 ? 'block' : 'none'
     } else if (idx === pagesOrdered.length - 1) {
-      // dernière page : seule flèche gauche
       btnLeft.style.display = 'block'
       btnRight.style.display = 'none'
     } else {
-      // pages normales : deux flèches
       btnLeft.style.display = idx > 0 ? 'block' : 'none'
       btnRight.style.display = idx < pagesOrdered.length - 1 ? 'block' : 'none'
     }
 
-    // préchargement + fallback si image introuvable
+    // --- Vérification image ---
     const imgTest = new Image()
     imgTest.src = imgUrl
     imgTest.onerror = () => {
@@ -121,7 +138,7 @@ export function initBook(selector = '#app') {
     }
   }
 
-  // navigation
+  // --- Navigation ---
   btnLeft.onclick = () => { if (idx > 0) { idx--; render() } }
   btnRight.onclick = () => { if (idx < pagesOrdered.length - 1) { idx++; render() } }
   window.onkeydown = (e) => {
