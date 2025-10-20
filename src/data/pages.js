@@ -2,7 +2,7 @@
 
 export const pages = [
   // 1 - couverture début
-  { id: 1, type: "cover", img: "/public/assets/page_1.png", title: "Les trois cheveux d’or du diable", text: "" },
+  { id: 1, type: "cover", img: "./public/assets/page_1.png", title: "Les trois cheveux d’or du diable", text: "" },
 
   // 2 - présentation
   { id: 2, type: "presentation", img: "/public/assets/page_2.png", title: "Les trois cheveux d’or du diable", translator: "Frédéric Baudry", author: "Les frères Grimm" 
