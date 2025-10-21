@@ -58,7 +58,6 @@ export function initBook(selector = '#app') {
               <p class="text-lg font-seagram italic mb-16" style="color:black">Traduit par ${page.translator || "un traducteur anonyme"}</p>
             </div>
 
-            <!-- En bas : éléments rapprochés du centre -->
             <div class="absolute bottom-10 left-1/4 text-lg font-seagram text-black">
               IUT Béziers
             </div>
@@ -71,18 +70,19 @@ export function initBook(selector = '#app') {
 
       // --- Page pleine (texte en haut) ---
       case 'pleine-haut': {
-        const isPage4 = page.id === 4
+        let paddingClass = 'p-12'
+        let textClass = 'text-lg max-w-3xl mx-auto font-seagram'
+
+        if (page.id === 4 || page.id === 10) {
+          // page 4 et page 10 : style spécifique
+          paddingClass = 'pt-1 px-2' // remonter le texte et réduire marges latérales
+          textClass = 'text-sm md:text-base leading-relaxed w-[95%] mx-auto text-justify font-seagram'
+        }
 
         html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
-            <div class="absolute top-0 left-0 w-full ${
-              isPage4 ? 'px-1 pt-2' : 'p-12'
-            }">
-              <p class="${
-                isPage4
-                  ? 'text-sm md:text-base leading-relaxed w-[90%] mx-auto text-justify font-seagram'
-                  : 'text-lg max-w-3xl mx-auto font-seagram'
-              }" style="color:black;">
+            <div class="absolute top-0 left-0 w-full ${paddingClass}">
+              <p class="${textClass}" style="color:black;">
                 ${page.text || ''}
               </p>
             </div>
@@ -91,43 +91,37 @@ export function initBook(selector = '#app') {
         break
       }
 
-    // --- Page pleine (texte en bas) ---
-    case 'pleine-bas': {
-      const isPage5 = page.id === 5
-      const isPage6 = page.id === 6
-      const isPage7 = page.id === 7
+      // --- Page pleine (texte en bas) ---
+      case 'pleine-bas': {
+        let bottomClass = 'bottom-0 p-8'
+        let textClass = 'text-lg max-w-3xl mx-auto font-seagram'
 
-      html = `
+        if (page.id === 5 || page.id === 12) {
+          bottomClass = 'bottom-8 px-6 pb-4' // texte plus bas
+          textClass = 'text-sm md:text-xl leading-relaxed w-[92%] mx-auto text-justify font-seagram' // réduit de 5%
+        } else if (page.id === 6) {
+          bottomClass = 'bottom-10 px-10'
+          textClass = 'text-xl md:text-3xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
+        } else if (page.id === 7) {
+          bottomClass = 'bottom-0 px-10'
+          textClass = 'text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
+        }
+
+        html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
-            <div class="absolute left-0 w-full ${
-              isPage5
-                ? 'bottom-0 px-6 pb-4'
-                : isPage6
-                ? 'bottom-10 px-10'
-                : isPage7
-                ? 'bottom-0 px-10'
-                : 'bottom-0 p-8'
-            }">
-              <p class="${
-            isPage5
-              ? 'text-lg md:text-2xl leading-relaxed w-[92%] mx-auto text-justify font-seagram'
-              : isPage6
-              ? 'text-xl md:text-3xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
-              : isPage7
-              ? 'text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
-              : 'text-lg max-w-3xl mx-auto font-seagram'
-          }" style="color:black;">
-            ${page.text || ''}
-          </p>
-        </div>
-      </div>
-      `
-      break
-    }
+            <div class="absolute left-0 w-full ${bottomClass}">
+              <p class="${textClass}" style="color:black;">
+                ${page.text || ''}
+              </p>
+            </div>
+          </div>
+        `
+        break
+      }
 
-            // --- Page moitié image / moitié texte ---
+      // --- Page moitié image / moitié texte ---
       case 'petite': {
-        const isPage9 = page.id === 9;
+        const isPage9 = page.id === 9
 
         html = `
           <div class="flex h-full">
@@ -142,7 +136,6 @@ export function initBook(selector = '#app') {
         `
         break
       }
-
 
       // --- Par défaut ---
       default:
