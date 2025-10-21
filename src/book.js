@@ -47,7 +47,7 @@ export function initBook(selector = '#app') {
         `
         break
 
-      // --- Nouvelle page de présentation ---
+      // --- Page de présentation ---
       case 'presentation':
         html = `
           <div class="relative h-full w-full bg-cover bg-center flex flex-col items-center justify-center text-center"
@@ -57,6 +57,7 @@ export function initBook(selector = '#app') {
               <p class="text-2xl mb-2 font-seagram" style="color:black">Les frères Grimm</p>
               <p class="text-lg font-seagram italic mb-16" style="color:black">Traduit par ${page.translator || "un traducteur anonyme"}</p>
             </div>
+
             <!-- En bas : éléments rapprochés du centre -->
             <div class="absolute bottom-10 left-1/4 text-lg font-seagram text-black">
               IUT Béziers
@@ -69,43 +70,79 @@ export function initBook(selector = '#app') {
         break
 
       // --- Page pleine (texte en haut) ---
-case 'pleine-haut':
-  html = `
-    <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
-      <div class="absolute top-0 left-0 w-full px-10 pt-8">
-        <p class="text-base md:text-lg lg:text-xl leading-relaxed max-w-5xl mx-auto text-justify font-seagram" style="color:black;">
-          ${page.text || ''}
-        </p>
-      </div>
-    </div>
-  `
-  break
+      case 'pleine-haut': {
+        const isPage4 = page.id === 4
 
-      // --- Page pleine (texte en bas) ---
-      case 'pleine-bas':
         html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
-            <div class="absolute bottom-0 left-0 w-full bg-black/60 p-8">
-              <p class="text-lg max-w-3xl mx-auto font-seagram">${page.text || ''}</p>
+            <div class="absolute top-0 left-0 w-full ${
+              isPage4 ? 'px-1 pt-2' : 'p-12'
+            }">
+              <p class="${
+                isPage4
+                  ? 'text-sm md:text-base leading-relaxed w-[90%] mx-auto text-justify font-seagram'
+                  : 'text-lg max-w-3xl mx-auto font-seagram'
+              }" style="color:black;">
+                ${page.text || ''}
+              </p>
             </div>
           </div>
         `
         break
+      }
 
-      // --- Page petite (moitié image / moitié texte) ---
-      case 'petite':
+    // --- Page pleine (texte en bas) ---
+    case 'pleine-bas': {
+      const isPage5 = page.id === 5
+      const isPage6 = page.id === 6
+      const isPage7 = page.id === 7
+
+      html = `
+          <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
+            <div class="absolute left-0 w-full ${
+              isPage5
+                ? 'bottom-0 px-6 pb-4'
+                : isPage6
+                ? 'bottom-10 px-10'
+                : isPage7
+                ? 'bottom-0 px-10'
+                : 'bottom-0 p-8'
+            }">
+              <p class="${
+            isPage5
+              ? 'text-lg md:text-2xl leading-relaxed w-[92%] mx-auto text-justify font-seagram'
+              : isPage6
+              ? 'text-xl md:text-3xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
+              : isPage7
+              ? 'text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
+              : 'text-lg max-w-3xl mx-auto font-seagram'
+          }" style="color:black;">
+            ${page.text || ''}
+          </p>
+        </div>
+      </div>
+      `
+      break
+    }
+
+            // --- Page moitié image / moitié texte ---
+      case 'petite': {
+        const isPage9 = page.id === 9;
+
         html = `
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image: url('${imgUrl}')"></div>
             <div class="w-1/2 bg-cover bg-center flex items-center justify-center p-8"
-                 style="background-image: url('/assets/page_vierge.jpg')">
-              <div class="bg-black/40 p-6 rounded-xl max-w-lg font-seagram">
-                <p class="text-lg leading-relaxed">${page.text || ''}</p>
+                style="background-image: url('/assets/page_vierge.jpg')">
+              <div class="${isPage9 ? 'mt-16' : 'p-6'} rounded-xl max-w-lg font-seagram">
+                <p class="text-lg leading-relaxed" style="color:black;">${page.text || ''}</p>
               </div>
             </div>
           </div>
         `
         break
+      }
+
 
       // --- Par défaut ---
       default:
@@ -121,7 +158,7 @@ case 'pleine-haut':
 
     pagesEl.innerHTML = html
 
-    // --- Flèches de navigation ---
+    // --- Gestion des flèches ---
     if (page.type === 'cover') {
       btnLeft.style.display = 'none'
       btnRight.style.display = idx < pagesOrdered.length - 1 ? 'block' : 'none'
@@ -133,7 +170,7 @@ case 'pleine-haut':
       btnRight.style.display = idx < pagesOrdered.length - 1 ? 'block' : 'none'
     }
 
-    // --- Vérification image ---
+    // --- Vérifie que l'image existe ---
     const imgTest = new Image()
     imgTest.src = imgUrl
     imgTest.onerror = () => {
