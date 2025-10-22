@@ -3,7 +3,7 @@
 const BASE = import.meta.env.BASE_URL;
 
 export const pages = [
-  // 1 - couverture début
+  // --- 1 - couverture début ---
   {
     id: 1,
     type: "cover",
@@ -12,7 +12,7 @@ export const pages = [
     text: "",
   },
 
-  // 2 - présentation
+  // --- 2 - présentation ---
   {
     id: 2,
     type: "presentation",
@@ -45,7 +45,7 @@ export const pages = [
     id: 16,
     type: "pleine-haut",
     img: `${BASE}assets/page_16.png`,
-    text: "Texte de la page 16...",
+    text: "De l’autre côté de l’eau, il trouva la bouche de l’enfer. Elle était noire et enfumée. Le diable n’était pas chez lui ; il n’y avait que son hôtesse, assise dans un large fauteuil. « Que demandes-tu ? lui dit-elle d’un ton assez doux. — Il me faut trois cheveux d’or de la tête du diable, sans quoi je n’obtiendrai pas ma femme.<br>— C’est beaucoup demander, dit-elle, et si le diable t’aperçoit quand il rentrera, tu passeras un mauvais quart d’heure. Cependant tu m’intéresses, et je vais tâcher de te venir en aide. » Elle le changea en fourmi et lui dit : « Monte dans les plis de ma robe ; là tu seras en sûreté. » — Merci, répondit-il, voilà qui va bien ; mais j’aurais besoin en outre de savoir trois choses : pourquoi une fontaine qui versait toujours du vin ne fournit plus même d’eau ; pourquoi un arbre qui portait des pommes d’or n’a plus même de feuilles ; et si un certain passager doit toujours rester à son poste sans jamais être relevé. — Ce sont trois questions difficiles, dit-elle ; mais tiens-toi bien tranquille, et sois attentif à ce que le diable dira quand je lui arracherai les trois cheveux d’or. »",
   },
 
   // --- Pages pleines bas ---
@@ -71,40 +71,35 @@ export const pages = [
     id: 12,
     type: "pleine-bas",
     img: `${BASE}assets/page_12.png`,
+    style: "mt-[3%]", // texte un peu plus bas
     text: "Il demanda au jeune homme ce qu’était devenue la lettre qu’il lui avait confiée, et pourquoi il en avait remis une autre. « Je n’en sais rien, répliqua celui-ci ; il faut qu’on l’ait changée la nuit, quand j’ai couché dans la forêt. » Le roi en colère lui dit : « Cela ne se passera pas ainsi. Celui qui prétend à ma fille doit me rapporter de l’enfer trois cheveux d’or de la tête du diable. Rapporte-les-moi, et ma fille t’appartiendra. » <br> Le roi espérait bien qu’il ne reviendrait jamais d’une pareille commission. Le jeune homme répondit : « Le diable ne me fait pas peur ; j’irai chercher les trois cheveux d’or, » Et il prit congé du roi et se mit en route.",
-  },
-  {
-    id: 17,
-    type: "pleine-bas",
-    img: `${BASE}assets/page_17.png`,
-    text: "Texte de la page 17...",
   },
   {
     id: 19,
     type: "pleine-bas",
     img: `${BASE}assets/page_19.png`,
-    text: "Texte de la page 19...",
+    text: "Plus loin, il retrouva la ville à l’arbre stérile ; la sentinelle attendait aussi sa réponse : « Tuez la souris qui ronge les racines, dit-il, et les pommes d’or reviendront. » La sentinelle, pour le remercier, lui donna deux ânes chargés d’or.",
   },
   {
     id: 20,
     type: "pleine-bas",
     img: `${BASE}assets/page_20.png`,
-    text: "Texte de la page 20...",
+    text: "Enfin il parvint à la ville dont la fontaine était à sec. Il dit à la sentinelle : « Il y a un crapaud sous une pierre dans la fontaine ; cherchez-le et tuez-le, et le vin recommencera à couler en abondance. » La sentinelle le remercia et lui donna encore deux ânes chargés d’or.",
   },
   {
     id: 21,
     type: "pleine-bas",
     img: `${BASE}assets/page_21.png`,
-    text: "Texte de la page 21...",
+    text: "Enfin, l’enfant né coiffé revint près de sa femme, qui se réjouit dans son cœur en le voyant de retour et en apprenant que tout s’était bien passé. Il remit au roi les trois cheveux d’or du diable. Celui-ci, en apercevant les quatre ânes chargés d’or, fut grandement satisfait et lui dit : « Maintenant toutes les conditions sont remplies, et ma fille est à toi. Mais, mon cher gendre, dis-moi d’où te vient tant d’or, car c’est un trésor énorme que tu rapportes.— Je l’ai pris, dit-il, de l’autre côté d’une rivière que j’ai traversée ; c’est le sable du rivage. — Pourrais-je m’en procurer autant ? lui demanda le roi, qui était un avare. — Tant que vous voudrez, répondit-il. Vous trouverez un passager ; adressez-vous à lui pour passer l’eau, et vous pourrez remplir vos sacs. »",
   },
   {
     id: 22,
     type: "pleine-bas",
     img: `${BASE}assets/page_22.png`,
-    text: "Texte de la page 22...",
+    text: "L’avide monarque se mit aussitôt en route, et, arrivé au bord de l’eau, il fit signe au passager de lui amener sa barque. Le passager le fit entrer, et, quand ils furent à l’autre bord, il lui mit la rame à la main et sauta dehors. Le roi devint ainsi passager en punition de ses péchés. « L’est-il encore ? — Eh ! sans doute, puisque personne ne lui a repris la rame. »",
   },
 
-  // --- Pages petites (image à gauche + page blanche à droite) ---
+  // --- Pages petites (image à gauche + fond vierge à droite) ---
   {
     id: 8,
     type: "petite",
@@ -127,28 +122,60 @@ export const pages = [
     id: 13,
     type: "petite",
     img: `${BASE}assets/page_13.png`,
-    text: "Texte de la page 13...",
+    text: "Il arriva devant une grande ville. A la porte, la sentinelle lui demanda quel était son état et ce qu’il savait : <br> « Tout, répondit-il. <br>— Alors, dit la sentinelle, rends-nous le service de nous apprendre pourquoi la fontaine de notre marché, qui nous donnait toujours du vin, s’est desséchée et ne fournit même plus d’eau. <br>— Attendez, répondit-il, je vous le dirai à mon retour. »",
   },
   {
     id: 14,
     type: "petite",
     img: `${BASE}assets/page_14.png`,
-    text: "Texte de la page 14...",
+    text: "Plus loin, il arriva devant une autre ville. La sentinelle de la porte lui demanda son état et ce qu’il savait. <br>« Tout, répondit-il. <br>— Rends-nous alors le service de nous apprendre pourquoi le grand arbre de notre ville, qui nous rapportait des pommes d’or, n’a plus même de feuilles.<br> — Attendez, répondit-il, je vous le dirai à mon retour. »",
   },
   {
     id: 15,
     type: "petite",
     img: `${BASE}assets/page_15.png`,
-    text: "Texte de la page 15...",
+    text: "Plus loin encore il arriva devant une grande rivière qu’il s’agissait de passer. Le passager lui demanda son état et ce qu’il savait.<br>« Tout, répondit-il.<br>— Alors, dit le passager, rends-moi le service de m’apprendre si je dois toujours rester a ce poste, sans jamais être relevé.<br>— Attends, répondit-il, je te le dirai à mon retour. »",
   },
+  {
+  id: 17,
+  type: "petite",
+  img: `${BASE}assets/page_17.png`,
+  text: `Quand le soir arriva, le diable revint chez lui. A peine était-il entré qu’il remarqua une odeur extraordinaire. « Il y a du nouveau ici, dit-il ; je sens la chair humaine. » Et il alla fureter dans tous les coins, mais sans rien trouver.<br>
+
+L’hôtesse lui chercha querelle : « Je viens de balayer et de ranger, dit-elle, et tu vas tout bouleverser ici, tu crois toujours sentir la chair humaine. Assieds-toi et mange ton souper. »<br>
+
+Quand il eut soupé, il était fatigué ; il posa sa tête sur les genoux de son hôtesse, et lui dit de lui chercher un peu les poux ; mais il ne tarda pas à s’endormir et à ronfler.
+La vieille saisit un cheveu d’or, l’arracha et le mit de côté. « Hé, s’écria le diable, qu’as-tu donc fait ?<br>
+— J’ai eu un mauvais rêve, dit l’hôtesse, et je t’ai pris par les cheveux.<br>
+— Qu’as-tu donc rêvé ? demanda le diable.<br>
+— J’ai rêvé que la fontaine d’un marché, qui versait toujours du vin, s’était arrêtée et qu’elle ne donnait plus même d’eau ; quelle en peut être la cause ?<br>
+— Ah ! si on le savait ! répliqua le diable : il y a un crapaud sous une pierre dans la fontaine ; on n’aurait qu’à le tuer, le vin recommencerait à couler. »<br>
+
+L’hôtesse se remit à lui chercher les poux ; il se rendormit et ronfla de façon à ébranler les vitres. Alors elle lui arracha le second cheveu. « Heu ! que fais-tu ? s’écria le diable en colère.<br>
+— Ne t’inquiète pas, répondit-elle, c’est un rêve que j’ai fait.<br>
+— Qu’as-tu rêvé encore ? demanda-t-il.<br>
+— J’ai rêvé que dans un pays il y a un arbre qui portait toujours des pommes d’or, et qui n’a plus même de feuilles ; quelle en pourrait être la cause ?<br>
+— Ah ! si on le savait ! répliqua le diable : il y a une souris qui ronge la racine ; on n’aurait qu’à la tuer, il reviendrait des pommes d’or à l’arbre ; mais si elle continue à la ronger, l’arbre mourra tout à fait. Maintenant laisse-moi en repos avec tes rêves. Si tu me réveilles encore, je te donnerai un soufflet. »<br> 
+
+L’hôtesse l’apaisa et se remit à lui chercher ses poux jusqu’à ce qu’il fût rendormi et ronflant. Alors elle saisit le troisième cheveu d’or et l’arracha. Le diable se leva en criant et voulait la battre ; elle le radoucit encore en disant : « Qui peut se garder d’un mauvais rêve ?<br>
+— Qu’as-tu donc rêvé encore ? demanda-t-il avec curiosité.<br>
+— J’ai rêvé d’un passager qui se plaignait de toujours passer l’eau avec sa barque, sans que personne le remplaçât jamais.<br>
+— Hé ! le sot ! répondit le diable : le premier qui viendra pour passer la rivière, il n’a qu’à lui mettre sa rame à la main, il sera libre et l’autre sera obligé de faire le passage à son tour. »<br>
+
+Comme l’hôtesse lui avait arraché les trois cheveux d’or, et qu’elle avait tiré de lui les trois réponses, elle le laissa en repos, et il dormit jusqu’au matin. Quand le diable eut quitté la maison, la vieille prit la fourmi dans les plis de sa robe et rendit au jeune homme sa figure humaine.<br>
+
+<i>Voilà les trois cheveux, lui dit-elle ; mais as-tu bien entendu les réponses du diable à tes questions ?<br>
+— Très-bien, répondit-il, et je m’en souviendrai.<br>
+— Te voilà donc hors d’embarras, dit-elle, et tu peux reprendre ta route.</i>`
+},
   {
     id: 18,
     type: "petite",
     img: `${BASE}assets/page_18.png`,
-    text: "Texte de la page 18...",
+    text: "Quand il arriva au passager, avant de lui donner la réponse promise, il se fit d’abord passer de l’autre côté, et alors il lui fit part du conseil donné par le diable : « Le premier qui viendra pour passer la rivière, tu n’as qu’à lui mettre ta rame à la main. »",
   },
 
-  // 23 - couverture fin
+  // --- 23 - couverture fin ---
   {
     id: 23,
     type: "cover",

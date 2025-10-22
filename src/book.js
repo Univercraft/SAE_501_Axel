@@ -70,14 +70,11 @@ export function initBook(selector = '#app') {
 
       // --- Page pleine (texte en haut) ---
       case 'pleine-haut': {
-        let paddingClass = 'p-12'
-        let textClass = 'text-lg max-w-3xl mx-auto font-seagram'
-
-        if (page.id === 4 || page.id === 10) {
-          // page 4 et page 10 : style spécifique
-          paddingClass = 'pt-1 px-2' // remonter le texte et réduire marges latérales
-          textClass = 'text-sm md:text-base leading-relaxed w-[95%] mx-auto text-justify font-seagram'
-        }
+        const isSpecialTop = page.id === 4 || page.id === 10 || page.id === 16
+        const paddingClass = isSpecialTop ? 'pt-1 px-2' : 'p-12'
+        const textClass = isSpecialTop
+          ? 'text-sm md:text-base leading-relaxed w-[95%] mx-auto text-justify font-seagram'
+          : 'text-lg max-w-3xl mx-auto font-seagram'
 
         html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image: url('${imgUrl}')">
@@ -96,15 +93,21 @@ export function initBook(selector = '#app') {
         let bottomClass = 'bottom-0 p-8'
         let textClass = 'text-lg max-w-3xl mx-auto font-seagram'
 
-        if (page.id === 5 || page.id === 12) {
-          bottomClass = 'bottom-8 px-6 pb-4' // texte plus bas
-          textClass = 'text-sm md:text-xl leading-relaxed w-[92%] mx-auto text-justify font-seagram' // réduit de 5%
+        if (page.id === 5) {
+          bottomClass = 'bottom-2 px-6 pb-4'
+          textClass = 'text-sm md:text-xl leading-relaxed w-[92%] mx-auto text-justify font-seagram'
+        } else if (page.id === 12) {
+          bottomClass = 'bottom-0 px-2 pb-0'
+          textClass = 'text-[0.9rem] md:text-[1.15rem] leading-relaxed w-[92%] mx-auto text-justify font-seagram'
         } else if (page.id === 6) {
           bottomClass = 'bottom-10 px-10'
           textClass = 'text-xl md:text-3xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
         } else if (page.id === 7) {
           bottomClass = 'bottom-0 px-10'
           textClass = 'text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-justify font-seagram'
+        } else if (page.id === 21) {
+          bottomClass = 'bottom-0 px-4 pb-6' // marges réduites
+          textClass = 'text-[0.95rem] md:text-[1.05rem] leading-relaxed w-[90%] mx-auto text-justify font-seagram' // texte légèrement réduit et plus large
         }
 
         html = `
@@ -122,14 +125,22 @@ export function initBook(selector = '#app') {
       // --- Page moitié image / moitié texte ---
       case 'petite': {
         const isPage9 = page.id === 9
+        let textClass = 'text-lg leading-relaxed'
+        let containerClass = isPage9 ? 'mt-16' : 'p-6 rounded-xl max-w-lg font-seagram'
+
+        // Page 17 spécifique
+        if (page.id === 17) {
+          textClass = 'text-[0.61rem] md:text-[0.71rem] leading-relaxed'
+          containerClass = 'p-6 rounded-xl w-[90%] mx-auto font-seagram bg-[#d8c195]/30' // arrière-plan léger
+        }
 
         html = `
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image: url('${imgUrl}')"></div>
             <div class="w-1/2 bg-cover bg-center flex items-center justify-center p-8"
                 style="background-image: url('/assets/page_vierge.jpg')">
-              <div class="${isPage9 ? 'mt-16' : 'p-6'} rounded-xl max-w-lg font-seagram">
-                <p class="text-lg leading-relaxed" style="color:black;">${page.text || ''}</p>
+              <div class="${containerClass}">
+                <p class="${textClass}" style="color:black;">${page.text || ''}</p>
               </div>
             </div>
           </div>
@@ -151,7 +162,7 @@ export function initBook(selector = '#app') {
 
     pagesEl.innerHTML = html
 
-    // --- Gestion des flèches ---
+    // --- Flèches ---
     if (page.type === 'cover') {
       btnLeft.style.display = 'none'
       btnRight.style.display = idx < pagesOrdered.length - 1 ? 'block' : 'none'
