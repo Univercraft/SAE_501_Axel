@@ -178,3 +178,29 @@ html, body {
     font-size: 1rem;
   }
 }
+
+
+/* --- EFFET FLIPBOOK --- */
+#book { perspective: 2000px; }
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform-origin: left center;
+  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.page.flip {
+  transform: rotateY(-180deg);
+  z-index: 1;
+}
+
+/* --- Animations internes --- */
+.fade-in { opacity: 0; transform: translateY(20px); transition: all 1s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+.float { animation: floaty 6s ease-in-out infinite; }
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
