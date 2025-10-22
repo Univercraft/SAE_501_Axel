@@ -138,7 +138,7 @@ export function initBook(selector = '#app') {
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image: url('${imgUrl}')"></div>
             <div class="w-1/2 bg-cover bg-center flex items-center justify-center p-8"
-                style="background-image: url('${BASE}/assets/page_vierge.jpg')">
+                style="background-image: url('./assets/page_vierge.jpg')">
               <div class="${containerClass}">
                 <p class="${textClass}" style="color:black;">${page.text || ''}</p>
               </div>
