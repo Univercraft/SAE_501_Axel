@@ -1,8 +1,8 @@
 // src/book.js
 import { pages } from './data/pages.js'
 
-// --- 🔊 Chargement du son de page (compatible GitHub Pages) ---
-const pageSound = new Audio(`${import.meta.env.BASE_URL}assets/bruit_page.mp3`)
+// --- 🔊 Chargement du son de page ---
+const pageSound = new Audio('./assets/bruit_page.mp3')
 pageSound.volume = 0.5 // volume modéré
 
 export function initBook(selector = '#app') {
@@ -53,9 +53,7 @@ export function initBook(selector = '#app') {
 
   // --- Fonction de rendu principale ---
   function renderContent(page) {
-    const imgUrl = page.img
-      ? `${import.meta.env.BASE_URL}${page.img.replace(/^\.?\/*/, '')}`
-      : `${import.meta.env.BASE_URL}assets/page_vierge.jpg`
+    const imgUrl = page.img || '/assets/page_vierge.jpg'
     let html = ''
 
     switch (page.type) {
@@ -127,7 +125,7 @@ export function initBook(selector = '#app') {
       }
 
       case 'petite': {
-        // ✅ Correction du style pour la page 9 + compatibilité GitHub Pages
+        // ✅ Correction du style pour la page 9
         let textClass = 'text-lg leading-relaxed text-justify font-seagram'
         let containerClass = 'p-6 rounded-xl max-w-lg mx-auto bg-[#d8c195]/20'
 
@@ -141,7 +139,7 @@ export function initBook(selector = '#app') {
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image:url('${imgUrl}')"></div>
             <div class="w-1/2 bg-cover bg-center flex items-center justify-center p-8"
-                style="background-image:url('${import.meta.env.BASE_URL}assets/page_vierge.jpg')">
+                style="background-image:url('/assets/page_vierge.jpg')">
               <div class="${containerClass}">
                 <p class="${textClass}" style="color:black;">${page.text || ''}</p>
               </div>
