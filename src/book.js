@@ -2,7 +2,8 @@
 import { pages } from './data/pages.js'
 
 // --- 🔊 Chargement du son de page ---
-const pageSound = new Audio('./assets/bruit_page.mp3')
+// ⚠️ IMPORTANT : le chemin doit être absolu pour GitHub Pages
+const pageSound = new Audio(`${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '')}/assets/bruit_page.mp3`)
 pageSound.volume = 0.5 // volume modéré
 
 export function initBook(selector = '#app') {
@@ -125,11 +126,9 @@ export function initBook(selector = '#app') {
       }
 
       case 'petite': {
-        // ✅ Correction du style pour la page 9
         let textClass = 'text-lg leading-relaxed text-justify font-seagram'
         let containerClass = 'p-6 rounded-xl max-w-lg mx-auto bg-[#d8c195]/20'
 
-        // cas spécifique : page 17 garde sa mise en forme spéciale
         if (page.id === 17) {
           textClass = 'text-[0.61rem] md:text-[0.71rem] leading-relaxed text-justify font-seagram'
           containerClass = 'p-6 rounded-xl w-[90%] mx-auto bg-[#d8c195]/30'
@@ -160,13 +159,11 @@ export function initBook(selector = '#app') {
     return html
   }
 
-  // --- Place le contenu dans les pages pré-créées ---
   allPages.forEach((pageEl, i) => {
     const page = pagesOrdered[i]
     pageEl.innerHTML = renderContent(page)
   })
 
-  // --- Affiche la page avec effet de flip ---
   function showPage(index) {
     allPages.forEach((page, i) => {
       if (i < index) page.style.transform = 'rotateY(-180deg)'
@@ -181,7 +178,6 @@ export function initBook(selector = '#app') {
     pageSound.play().catch(() => {})
   }
 
-  // --- Navigation ---
   btnLeft.onclick = () => { if (idx > 0) { idx--; showPage(idx) } }
   btnRight.onclick = () => { if (idx < allPages.length - 1) { idx++; showPage(idx) } }
   window.onkeydown = (e) => {
