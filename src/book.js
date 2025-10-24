@@ -2,8 +2,8 @@
 import { pages } from './data/pages.js'
 
 // --- 🔊 Chargement du son de page ---
-// ⚠️ IMPORTANT : le chemin doit être absolu pour GitHub Pages
-const pageSound = new Audio(`${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '')}/assets/bruit_page.mp3`)
+const basePath = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '')}`
+const pageSound = new Audio(`${basePath}/assets/bruit_page.mp3`)
 pageSound.volume = 0.5 // volume modéré
 
 export function initBook(selector = '#app') {
@@ -27,7 +27,7 @@ export function initBook(selector = '#app') {
   const btnLeft = root.querySelector('#nav-left')
   const btnRight = root.querySelector('#nav-right')
 
-  // --- Crée toutes les pages d'avance (pour le flip fluide) ---
+  // --- Crée toutes les pages d'avance ---
   pagesContainer.innerHTML = pagesOrdered
     .map(
       (_, i) => `
@@ -54,7 +54,12 @@ export function initBook(selector = '#app') {
 
   // --- Fonction de rendu principale ---
   function renderContent(page) {
-    const imgUrl = page.img || '/assets/page_vierge.jpg'
+    // ✅ Corrige tous les chemins d’images
+    const imgUrl = page.img
+      ? `${basePath}${page.img.startsWith('/') ? page.img : '/' + page.img}`
+      : `${basePath}/assets/page_vierge.jpg`
+    const pageVierge = `${basePath}/assets/page_vierge.jpg`
+
     let html = ''
 
     switch (page.type) {
@@ -138,7 +143,7 @@ export function initBook(selector = '#app') {
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image:url('${imgUrl}')"></div>
             <div class="w-1/2 bg-cover bg-center flex items-center justify-center p-8"
-                style="background-image:url('/assets/page_vierge.jpg')">
+                style="background-image:url('${pageVierge}')">
               <div class="${containerClass}">
                 <p class="${textClass}" style="color:black;">${page.text || ''}</p>
               </div>
@@ -173,7 +178,6 @@ export function initBook(selector = '#app') {
     btnLeft.style.display = index > 0 ? 'block' : 'none'
     btnRight.style.display = index < allPages.length - 1 ? 'block' : 'none'
 
-    // 🔊 Joue le son à chaque flip
     pageSound.currentTime = 0
     pageSound.play().catch(() => {})
   }
