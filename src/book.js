@@ -1,6 +1,10 @@
 // src/book.js
 import { pages } from './data/pages.js'
 
+// --- 🔊 Chargement du son de page ---
+const pageSound = new Audio('/assets/bruit_page.mp3')
+pageSound.volume = 0.5 // volume modéré
+
 export function initBook(selector = '#app') {
   const root = document.querySelector(selector)
   root.innerHTML = `
@@ -35,11 +39,22 @@ export function initBook(selector = '#app') {
 
   const allPages = pagesContainer.querySelectorAll('.page')
 
-  // --- Fonction de rendu (ton ancienne logique complète) ---
+  // --- Débloque l’audio après la première interaction ---
+  function unlockAudio() {
+    pageSound.play().then(() => {
+      pageSound.pause()
+      pageSound.currentTime = 0
+      document.removeEventListener('click', unlockAudio)
+      document.removeEventListener('keydown', unlockAudio)
+    }).catch(() => {})
+  }
+  document.addEventListener('click', unlockAudio)
+  document.addEventListener('keydown', unlockAudio)
+
+  // --- Fonction de rendu (inchangée) ---
   function renderContent(page) {
     const imgUrl = page.img || '/assets/page_vierge.jpg'
     let html = ''
-
     switch (page.type) {
       case 'cover':
         html = `
@@ -50,7 +65,6 @@ export function initBook(selector = '#app') {
             </div>
           </div>`
         break
-
       case 'presentation':
         html = `
           <div class="relative h-full w-full bg-cover bg-center flex flex-col items-center justify-center text-center"
@@ -60,19 +74,16 @@ export function initBook(selector = '#app') {
               <p class="text-2xl mb-2 font-seagram" style="color:black">Les frères Grimm</p>
               <p class="text-lg font-seagram italic mb-16" style="color:black">Traduit par ${page.translator || "un traducteur anonyme"}</p>
             </div>
-
             <div class="absolute bottom-10 left-1/4 text-lg font-seagram text-black">IUT Béziers</div>
             <div class="absolute bottom-10 right-1/4 text-lg font-seagram text-black">Axel CAETANO</div>
           </div>`
         break
-
       case 'pleine-haut': {
         const isSpecialTop = page.id === 4 || page.id === 10 || page.id === 16
         const paddingClass = isSpecialTop ? 'pt-1 px-2' : 'p-12'
         const textClass = isSpecialTop
           ? 'text-sm md:text-base leading-relaxed w-[95%] mx-auto text-justify font-seagram'
           : 'text-lg max-w-3xl mx-auto font-seagram'
-
         html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image:url('${imgUrl}')">
             <div class="absolute top-0 left-0 w-full ${paddingClass}">
@@ -81,7 +92,6 @@ export function initBook(selector = '#app') {
           </div>`
         break
       }
-
       case 'pleine-bas': {
         let bottomClass = 'bottom-0 p-8'
         let textClass = 'text-lg max-w-3xl mx-auto font-seagram'
@@ -101,7 +111,6 @@ export function initBook(selector = '#app') {
           bottomClass = 'bottom-0 px-4 pb-6'
           textClass = 'text-[0.95rem] md:text-[1.05rem] leading-relaxed w-[90%] mx-auto text-justify font-seagram'
         }
-
         html = `
           <div class="relative h-full w-full bg-cover bg-center" style="background-image:url('${imgUrl}')">
             <div class="absolute left-0 w-full ${bottomClass}">
@@ -110,7 +119,6 @@ export function initBook(selector = '#app') {
           </div>`
         break
       }
-
       case 'petite': {
         const isPage9 = page.id === 9
         let textClass = 'text-lg leading-relaxed'
@@ -119,12 +127,11 @@ export function initBook(selector = '#app') {
           textClass = 'text-[0.61rem] md:text-[0.71rem] leading-relaxed'
           containerClass = 'p-6 rounded-xl w-[90%] mx-auto font-seagram bg-[#d8c195]/30'
         }
-
         html = `
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image:url('${imgUrl}')"></div>
             <div class="w-1/2 bg-cover bg-center flex items-center justify-center p-8"
-                style="background-image:url('./assets/page_vierge.jpg')">
+                style="background-image:url('/assets/page_vierge.jpg')">
               <div class="${containerClass}">
                 <p class="${textClass}" style="color:black;">${page.text || ''}</p>
               </div>
@@ -132,7 +139,6 @@ export function initBook(selector = '#app') {
           </div>`
         break
       }
-
       default:
         html = `
           <div class="h-full w-full flex items-center justify-center bg-gray-800">
@@ -160,8 +166,13 @@ export function initBook(selector = '#app') {
 
     btnLeft.style.display = index > 0 ? 'block' : 'none'
     btnRight.style.display = index < allPages.length - 1 ? 'block' : 'none'
+
+    // 🔊 Joue le son à chaque flip
+    pageSound.currentTime = 0
+    pageSound.play().catch(() => {})
   }
 
+  // --- Navigation ---
   btnLeft.onclick = () => { if (idx > 0) { idx--; showPage(idx) } }
   btnRight.onclick = () => { if (idx < allPages.length - 1) { idx++; showPage(idx) } }
   window.onkeydown = (e) => {
