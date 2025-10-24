@@ -2,8 +2,7 @@
 import { pages } from './data/pages.js'
 
 // --- 🔊 Chargement du son de page ---
-const basePath = `${window.location.origin}${window.location.pathname.replace(/\/[^/]*$/, '')}`
-const pageSound = new Audio(`${basePath}/assets/bruit_page.mp3`)
+const pageSound = new Audio('/SAE_501_Axel/assets/bruit_page.mp3')
 pageSound.volume = 0.5 // volume modéré
 
 export function initBook(selector = '#app') {
@@ -33,8 +32,7 @@ export function initBook(selector = '#app') {
       (_, i) => `
       <div class="page absolute inset-0 transition-all duration-700 ease-in-out [transform-origin:left] [backface-visibility:hidden]"
            style="transform: rotateY(0deg); z-index:${pagesOrdered.length - i};">
-      </div>
-    `
+      </div>`
     )
     .join('')
 
@@ -54,12 +52,7 @@ export function initBook(selector = '#app') {
 
   // --- Fonction de rendu principale ---
   function renderContent(page) {
-    // ✅ Corrige tous les chemins d’images
-    const imgUrl = page.img
-      ? `${basePath}${page.img.startsWith('/') ? page.img : '/' + page.img}`
-      : `${basePath}/assets/page_vierge.jpg`
-    const pageVierge = `${basePath}/assets/page_vierge.jpg`
-
+    const imgUrl = page.img || '/SAE_501_Axel/assets/page_vierge.jpg'
     let html = ''
 
     switch (page.type) {
@@ -143,7 +136,7 @@ export function initBook(selector = '#app') {
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image:url('${imgUrl}')"></div>
             <div class="w-1/2 bg-cover bg-center flex items-center justify-center p-8"
-                style="background-image:url('${pageVierge}')">
+                style="background-image:url('/SAE_501_Axel/assets/page_vierge.jpg')">
               <div class="${containerClass}">
                 <p class="${textClass}" style="color:black;">${page.text || ''}</p>
               </div>
@@ -164,11 +157,13 @@ export function initBook(selector = '#app') {
     return html
   }
 
+  // --- Place le contenu dans les pages pré-créées ---
   allPages.forEach((pageEl, i) => {
     const page = pagesOrdered[i]
     pageEl.innerHTML = renderContent(page)
   })
 
+  // --- Affiche la page avec effet de flip ---
   function showPage(index) {
     allPages.forEach((page, i) => {
       if (i < index) page.style.transform = 'rotateY(-180deg)'
@@ -178,10 +173,12 @@ export function initBook(selector = '#app') {
     btnLeft.style.display = index > 0 ? 'block' : 'none'
     btnRight.style.display = index < allPages.length - 1 ? 'block' : 'none'
 
+    // 🔊 Joue le son à chaque flip
     pageSound.currentTime = 0
     pageSound.play().catch(() => {})
   }
 
+  // --- Navigation ---
   btnLeft.onclick = () => { if (idx > 0) { idx--; showPage(idx) } }
   btnRight.onclick = () => { if (idx < allPages.length - 1) { idx++; showPage(idx) } }
   window.onkeydown = (e) => {
