@@ -2,7 +2,7 @@
 import { pages } from './data/pages.js'
 
 // --- 🔊 Chargement du son de page ---
-const pageSound = new Audio('/assets/bruit_page.mp3')
+const pageSound = new Audio('./assets/bruit_page.mp3')
 pageSound.volume = 0.5 // volume modéré
 
 export function initBook(selector = '#app') {
@@ -51,10 +51,11 @@ export function initBook(selector = '#app') {
   document.addEventListener('click', unlockAudio)
   document.addEventListener('keydown', unlockAudio)
 
-  // --- Fonction de rendu (inchangée) ---
+  // --- Fonction de rendu principale ---
   function renderContent(page) {
     const imgUrl = page.img || '/assets/page_vierge.jpg'
     let html = ''
+
     switch (page.type) {
       case 'cover':
         html = `
@@ -65,6 +66,7 @@ export function initBook(selector = '#app') {
             </div>
           </div>`
         break
+
       case 'presentation':
         html = `
           <div class="relative h-full w-full bg-cover bg-center flex flex-col items-center justify-center text-center"
@@ -78,6 +80,7 @@ export function initBook(selector = '#app') {
             <div class="absolute bottom-10 right-1/4 text-lg font-seagram text-black">Axel CAETANO</div>
           </div>`
         break
+
       case 'pleine-haut': {
         const isSpecialTop = page.id === 4 || page.id === 10 || page.id === 16
         const paddingClass = isSpecialTop ? 'pt-1 px-2' : 'p-12'
@@ -92,6 +95,7 @@ export function initBook(selector = '#app') {
           </div>`
         break
       }
+
       case 'pleine-bas': {
         let bottomClass = 'bottom-0 p-8'
         let textClass = 'text-lg max-w-3xl mx-auto font-seagram'
@@ -119,14 +123,18 @@ export function initBook(selector = '#app') {
           </div>`
         break
       }
+
       case 'petite': {
-        const isPage9 = page.id === 9
-        let textClass = 'text-lg leading-relaxed'
-        let containerClass = isPage9 ? 'mt-16' : 'p-6 rounded-xl max-w-lg font-seagram'
+        // ✅ Correction du style pour la page 9
+        let textClass = 'text-lg leading-relaxed text-justify font-seagram'
+        let containerClass = 'p-6 rounded-xl max-w-lg mx-auto bg-[#d8c195]/20'
+
+        // cas spécifique : page 17 garde sa mise en forme spéciale
         if (page.id === 17) {
-          textClass = 'text-[0.61rem] md:text-[0.71rem] leading-relaxed'
-          containerClass = 'p-6 rounded-xl w-[90%] mx-auto font-seagram bg-[#d8c195]/30'
+          textClass = 'text-[0.61rem] md:text-[0.71rem] leading-relaxed text-justify font-seagram'
+          containerClass = 'p-6 rounded-xl w-[90%] mx-auto bg-[#d8c195]/30'
         }
+
         html = `
           <div class="flex h-full">
             <div class="w-1/2 bg-cover bg-center" style="background-image:url('${imgUrl}')"></div>
@@ -139,6 +147,7 @@ export function initBook(selector = '#app') {
           </div>`
         break
       }
+
       default:
         html = `
           <div class="h-full w-full flex items-center justify-center bg-gray-800">
@@ -151,7 +160,7 @@ export function initBook(selector = '#app') {
     return html
   }
 
-  // --- Place ton contenu dans les pages pré-créées ---
+  // --- Place le contenu dans les pages pré-créées ---
   allPages.forEach((pageEl, i) => {
     const page = pagesOrdered[i]
     pageEl.innerHTML = renderContent(page)
